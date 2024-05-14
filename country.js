@@ -12,20 +12,41 @@ const capital = document.querySelector(".capital");
 const topLevelDomain = document.querySelector(".topLevelDomain");
 const currency = document.querySelector(".currency");
 const language = document.querySelector(".language");
-const borderCountries=document.querySelector('.border-countries')
+const borderCountries = document.querySelector('.border-countries')
 
 
-const darkToggling=document.querySelector(".header-content p")
 
-const body=document.querySelector("body")
+//dark Toggling
+const body = document.querySelector("body")
+const darkToggling = document.querySelector(".header-content p")
+
+let theme;
+let themeText;
+body.classList.value = localStorage.getItem("theme") || ''
+darkToggling.innerHTML = localStorage.getItem("themeText") || `<i class="fa fa-moon-o"></i> &nbsp;Dark Mode`
+
+
 
 darkToggling.addEventListener("click", () => {
+
     body.classList.toggle("dark")
+
     if (body.classList.value === "dark") {
-        darkToggling.innerHTML = `<i class="fa fa-sun-o"></i> &nbsp;Light Mode`
+        themeText = `<i class="fa fa-sun-o"></i> &nbsp;Light Mode`
+        darkToggling.innerHTML = themeText
+        // console.log("1");
+        theme = body.classList.value
+        localStorage.setItem("theme", theme)
+        localStorage.setItem("themeText", themeText)
     }
-    else {
-        darkToggling.innerHTML = `<i class="fa fa-moon-o"></i> &nbsp;Dark Mode`
+    if (body.classList.value === "") {
+        themeText = `<i class="fa fa-moon-o"></i> &nbsp;Dark Mode`
+        darkToggling.innerHTML = themeText
+        // console.log("2");
+        theme = " "
+
+        localStorage.setItem("theme", theme)
+        localStorage.setItem("themeText", themeText)
     }
 })
 
@@ -56,28 +77,29 @@ fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`).then((
             language.innerText = Object.values(data.languages).join(', ')
         }
 
-        if(data.borders){
-            
+        if (data.borders) {
+            // console.log(data.borders);
+
             data.borders.forEach(borderCountry => {
-                fetch(`https://restcountries.com/v3.1/alpha/${borderCountry}`).then((res)=>{
+                fetch(`https://restcountries.com/v3.1/alpha/${borderCountry}`).then((res) => {
                     return res.json()
-                }).then(([dataBorderCountry])=>{
+                }).then(([dataBorderCountry]) => {
                     // console.log(dataBorderCountry.name.common);
-                    if(dataBorderCountry){
-                        const anchorTag=document.createElement('a');
-                    anchorTag.innerText=dataBorderCountry.name.common
-                    anchorTag.href=`country.html?name=${dataBorderCountry.name.common}`
-                    borderCountries.append(anchorTag)
+                    if (dataBorderCountry) {
+                        const anchorTag = document.createElement('a');
+                        anchorTag.innerText = dataBorderCountry.name.common
+                        anchorTag.href = `country.html?name=${dataBorderCountry.name.common}`
+                        borderCountries.append(anchorTag)
                     }
                 })
-                
+
             });
 
 
 
         }
 
-        
+
 
 
 

@@ -4,24 +4,43 @@ const filterByRegion = document.querySelector(".filter-by-region");
 const searchInput = document.querySelector(".search-container input")
 
 
+// darkToggling
+const body = document.querySelector("body")
 const darkToggling = document.querySelector(".header-content p")
 
-const body = document.querySelector("body")
+let theme;
+let themeText;
+body.classList.value = localStorage.getItem("theme") || ''
+darkToggling.innerHTML = localStorage.getItem("themeText") || `<i class="fa fa-moon-o"></i> &nbsp;Dark Mode`
+
+
 
 darkToggling.addEventListener("click", () => {
+
     body.classList.toggle("dark")
+
     if (body.classList.value === "dark") {
-        darkToggling.innerHTML = `<i class="fa fa-sun-o"></i> &nbsp;Light Mode`
+        themeText = `<i class="fa fa-sun-o"></i> &nbsp;Light Mode`
+        darkToggling.innerHTML = themeText
+        // console.log("1");
+        theme = body.classList.value
+        localStorage.setItem("theme", theme)
+        localStorage.setItem("themeText", themeText)
     }
-    else {
-        darkToggling.innerHTML = `<i class="fa fa-moon-o"></i> &nbsp;Dark Mode`
+    if (body.classList.value === "") {
+        themeText = `<i class="fa fa-moon-o"></i> &nbsp;Dark Mode`
+        darkToggling.innerHTML = themeText
+        // console.log("2");
+        theme = " "
+
+        localStorage.setItem("theme", theme)
+        localStorage.setItem("themeText", themeText)
     }
 })
 
 
+
 let allCountriesData;
-
-
 
 fetch('https://restcountries.com/v3.1/all').then((res) => { return res.json() }).then((data) => {
     getCountries(data)
@@ -30,18 +49,29 @@ fetch('https://restcountries.com/v3.1/all').then((res) => { return res.json() })
 
 
 
-filterByRegion.addEventListener("change", () => {
+filterByRegion.addEventListener("change", (e) => {
+    console.log(e.target.value);
     fetch(`https://restcountries.com/v3.1/region/${filterByRegion.value}`).then((res) => { return res.json() }).then(
         getCountries
     )
 
 })
 
+
+// getCountries Function will be respsible for showing the country details in the form of card
+
 function getCountries(data) {
     countriesContainer.innerHTML = ''
     data.forEach(country => {
+
+        //every card is an hyperLink
+
         const countryCard = document.createElement('a');
+
         countryCard.classList.add("country-card");
+
+
+        //storing href based on country name so that to get in a another js file as a URLPattern
 
         countryCard.href = `country.html?name=${country.name.common}`
 
@@ -64,9 +94,12 @@ function getCountries(data) {
 }
 
 
+
+// inputBox 
+
 searchInput.addEventListener("input", (e) => {
     // console.log(e.target.value);
     // console.log(allCountriesData);
     const filteredCountry = allCountriesData.filter((country) => country.name.common.toLowerCase().includes(e.target.value.toLowerCase()))
-    getCountries(filteredCountry)
+    getCountries(filteredCountry) //filteredCountry is an array returned from filter() and passes as a parameter in getCountries function
 })

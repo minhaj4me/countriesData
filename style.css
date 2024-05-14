@@ -3,6 +3,11 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
+
 body {
     --background-color: white;
     --text-color: black;
@@ -17,16 +22,19 @@ body {
 }
 
 
-body.dark{
-    --background-color: hsl(207,26%,17%);
+body.dark {
+    --background-color: hsl(207, 26%, 17%);
     --text-color: white;
-    --elements-color: hsl(209,23%,22%);
+    --elements-color: hsl(209, 23%, 22%);
 }
 
 .header-container {
     padding: 0 24px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
     background-color: var(--elements-color);
+    background: transparent;
+    width: 100%;
+    position: fixed;
 }
 
 
@@ -42,7 +50,7 @@ h2 {
     font-weight: 800;
 }
 
-.header-content p{
+.header-content p {
     cursor: pointer;
 }
 
@@ -59,7 +67,8 @@ main {
     display: flex;
     justify-content: space-between;
     gap: 64px;
-    
+    margin-top: 64px;
+
 }
 
 .search-container {
@@ -73,6 +82,8 @@ main {
     margin-bottom: 48px;
     background-color: var(--background-color);
     color: var(--text-color);
+    border: 1px solid #ddd;
+
 
 }
 
@@ -98,7 +109,8 @@ main {
     width: 200px;
     padding: 0 16px;
     height: 50px;
-    border: none;
+    /* border: none; */
+    border: 1px solid #ddd;
     outline: none;
     margin-bottom: 48px;
     border-radius: 4px;
@@ -160,8 +172,26 @@ a {
     margin-block: 8px;
 }
 
+.btp {
+    height: 20px;
+    width: 100%;
+    text-align: end;
+    position: fixed;
+    bottom: 20px;
+    right: 8px;
+    font-size: 20px;
+    z-index: 2;
+    color: red;
+}
+
+
+
+
 
 @media (max-width:768px) {
+    .header-content p {
+        margin-bottom: 8px;
+    }
     .countries-container {
         justify-content: center;
     }
@@ -190,5 +220,23 @@ a {
     .filter-by-region {
         max-width: 200px;
         width: 100%;
+    }
+
+    .btp {
+        height: 20px;
+        width: 100%;
+        text-align: end;
+        position: fixed;
+        bottom: 20px;
+        right: 8px;
+        font-size: 20px;
+        z-index: 2;
+        color: red;
+    }
+}
+
+@media(max-width:400px){
+    .header-content h2 a{
+        font-size: 16px;
     }
 }

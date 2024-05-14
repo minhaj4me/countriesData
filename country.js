@@ -15,7 +15,13 @@ const language = document.querySelector(".language");
 const borderCountries=document.querySelector('.border-countries')
 
 
+const darkToggling=document.querySelector(".header-content p")
 
+const body=document.querySelector("body")
+
+darkToggling.addEventListener("click",()=>{
+    body.classList.toggle("dark")
+})
 
 
 fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`).then((res) => {

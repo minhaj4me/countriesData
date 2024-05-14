@@ -51,25 +51,6 @@ darkToggling.addEventListener("click", () => {
 })
 
 
-//backButton
-
-
-const backButton = document.querySelector(".back-button");
-
-backButton.addEventListener("click", function () {
-    // Going back in the browser history
-    history.back();
-
-    // Reloading the current page after a slight delay
-    setTimeout(function () {
-        location.reload();
-    }, 100);
-});
-
-
-
-//fetching
-
 fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`).then((res) => {
     return res.json()
 }).then(

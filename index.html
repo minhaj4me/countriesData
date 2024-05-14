@@ -20,7 +20,7 @@
 
     <header class="header-container">
         <div class="header-content">
-            <h2>Where in the world?</h2>
+            <h2><a href="/">Where in the world?</a></h2>
             <p><i class="fa fa-moon-o"></i>&nbsp; Dark Mode</p>
         </div>
     </header>
@@ -29,23 +29,31 @@
     <!-- main -->
 
     <main>
+        <div class="search-filter-container">
+            <div class="search-container">
+                <i class="fa fa-search"></i>
+                <input type="text" placeholder="Search For a Country...">
+            </div>
+            <select class="filter-by-region">
+                <option value="Filter By Region" hidden>Filter By Region</option>
+                <option value="Asia">Asia</option>
+                <option value="Africa">Africa</option>
+                <option value="Europe">Europe</option>
+                <option value="Oceania">Oceania</option>
+                <option value="America">America</option>
+                <option value="Antarctic">Antarctic</option>
+            </select>
+        </div>
+
         <div class="countries-container">
-            <!-- <a href="#" class="country-card">
-                <img src="https://flagcdn.com/is.svg" alt="">
-                <div class="card-text">
-                    <h3 class="card-title">
-                        Iceland
-                    </h3>
-                    <p><b>Population: </b>81,770,900</p>
-                    <p><b>Region: </b>Europe</p>
-                    <p><b>Capital: </b>Berlin</p>
-                </div>
-            </a> -->
+
+            <!-- countriesCard -->
+
         </div>
     </main>
 
 
-    <script src="script.js" ></script>
+    <script src="script.js"></script>
 </body>
 
 </html>

@@ -1,15 +1,21 @@
 const countriesContainer = document.querySelector(".countries-container");
 const filterByRegion = document.querySelector(".filter-by-region");
 
-const searchInput=document.querySelector(".search-container input")
+const searchInput = document.querySelector(".search-container input")
 
 
-const darkToggling=document.querySelector(".header-content p")
+const darkToggling = document.querySelector(".header-content p")
 
-const body=document.querySelector("body")
+const body = document.querySelector("body")
 
-darkToggling.addEventListener("click",()=>{
+darkToggling.addEventListener("click", () => {
     body.classList.toggle("dark")
+    if (body.classList.value === "dark") {
+        darkToggling.innerHTML = `<i class="fa fa-sun-o"></i> &nbsp;Light Mode`
+    }
+    else {
+        darkToggling.innerHTML = `<i class="fa fa-moon-o"></i> &nbsp;Dark Mode`
+    }
 })
 
 
@@ -19,7 +25,7 @@ let allCountriesData;
 
 fetch('https://restcountries.com/v3.1/all').then((res) => { return res.json() }).then((data) => {
     getCountries(data)
-    allCountriesData=data;
+    allCountriesData = data;
 })
 
 
@@ -58,9 +64,9 @@ function getCountries(data) {
 }
 
 
-searchInput.addEventListener("input",(e)=>{
+searchInput.addEventListener("input", (e) => {
     // console.log(e.target.value);
     // console.log(allCountriesData);
-    const filteredCountry=allCountriesData.filter((country)=>country.name.common.toLowerCase().includes(e.target.value.toLowerCase()))
+    const filteredCountry = allCountriesData.filter((country) => country.name.common.toLowerCase().includes(e.target.value.toLowerCase()))
     getCountries(filteredCountry)
 })

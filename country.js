@@ -19,8 +19,14 @@ const darkToggling=document.querySelector(".header-content p")
 
 const body=document.querySelector("body")
 
-darkToggling.addEventListener("click",()=>{
+darkToggling.addEventListener("click", () => {
     body.classList.toggle("dark")
+    if (body.classList.value === "dark") {
+        darkToggling.innerHTML = `<i class="fa fa-sun-o"></i> &nbsp;Light Mode`
+    }
+    else {
+        darkToggling.innerHTML = `<i class="fa fa-moon-o"></i> &nbsp;Dark Mode`
+    }
 })
 
 
